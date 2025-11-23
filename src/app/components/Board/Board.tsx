@@ -1,5 +1,5 @@
-import Square from "../Square/Square.js";
-import { checkWinner } from "../../utils/validation_utils.js";
+import Square from "@/app/components/Square/Square";
+import { checkWinner } from "@/app/utils/validation_utils";
 import "./Board.css";
 
 function Board({ xIsNext, squares, onPlay, sideSize }) {

@@ -2,6 +2,8 @@
 node_modules/
 web_modules/
 deprecated/
+/coverage
+/build
 
 # Hidden Files
 .DS_Store
@@ -16,3 +18,7 @@ npm-debug.log*
 
 # Build Output
 out
+
+# next.js
+/.next/
+/out/

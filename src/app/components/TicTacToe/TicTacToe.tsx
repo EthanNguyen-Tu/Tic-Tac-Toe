@@ -1,4 +1,4 @@
-import Board from "../Board/Board";
+import Board from "@/app/components/Board/Board";
 import { useState } from "react";
 import "./TicTacToe.css";
 

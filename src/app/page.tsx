@@ -1,8 +1,10 @@
-import TicTacToe from "./components/TicTacToe/TicTacToe";
+"use client";
+
+import TicTacToe from "@/app/components/TicTacToe/TicTacToe";
 import { useId, useRef, useState } from "react";
 import { boundedNumber } from "./utils/number_utils";
 
-function App() {
+export default function Home() {
     const boardFormId = useId();
     const [boardSideSize, setBoardSideSize] = useState(5);
     const [boardKey, setBoardKey] = useState(true); // reset the board
@@ -41,4 +43,3 @@ function App() {
     );
 }
 
-export default App;
