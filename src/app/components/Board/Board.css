@@ -1,9 +1,0 @@
-.board-row:after {
-    clear: both;
-    content: "";
-    display: table;
-}
-
-.board-row {
-    width: fit-content;
-}

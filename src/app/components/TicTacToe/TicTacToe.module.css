@@ -1,14 +1,15 @@
-.tic-tac-toe {
+.container {
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: center;
 }
 
-.tic-tac-toe-board {
+.board {
+    justify-content: center;
     text-align: center;
 }
 
-.tic-tac-toe-info {
+.history {
     margin-left: 30px;
 }
