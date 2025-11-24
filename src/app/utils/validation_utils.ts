@@ -1,47 +1,58 @@
-export function checkWinner(squares, sideSize) {
-    /*
-  Iteratively checks all valid ways to win in Tic-Tac-Toe
-  */
-    let arr;
+import { Player } from "@/app/components/Board/Board";
 
-    // Checks that all values in the array are not null and the same
-    const allEqual = (arr) => arr.every((val) => val != null && val === arr[0]);
+// Time Complexity: O(n^2) where n is the side size of the board.
+// Space Complexity: O(n) where n is the side size of the board.
 
-    // Check each row
-    for (let i = 0; i < squares.length; i = i + sideSize) {
-        arr = squares.slice(i, i + sideSize);
-        if (allEqual(arr)) {
-            return arr[0];
+export function checkWinner(
+    squares: (string | null)[],
+    sideSize: number
+): Player | null {
+    const rows: number[] = new Array(sideSize).fill(0);
+    const cols: number[] = new Array(sideSize).fill(0);
+    let diag1: number = 0;
+    let diag2: number = 0;
+
+    for (let i = 0; i < sideSize; i++) {
+        for (let j = 0; j < sideSize; j++) {
+            if (squares[i * sideSize + j] === Player.X) {
+                rows[i] += 1;
+                cols[j] += 1;
+                if (i === j) {
+                    diag1 += 1;
+                }
+                if (i + j === sideSize - 1) {
+                    diag2 += 1;
+                }
+            } else if (squares[i * sideSize + j] === Player.O) {
+                rows[i] -= 1;
+                cols[j] -= 1;
+                if (i === j) {
+                    diag1 -= 1;
+                }
+                if (i + j === sideSize - 1) {
+                    diag2 -= 1;
+                }
+            }
         }
     }
 
-    // Check each column
-    for (let i = 0; i < sideSize; i++) {
-        arr = [];
-        for (let j = i; j < squares.length; j = j + sideSize) {
-            arr.push(squares[j]);
-        }
-        if (allEqual(arr)) {
-            return arr[0];
-        }
+    if (
+        rows.includes(sideSize) ||
+        cols.includes(sideSize) ||
+        diag1 === sideSize ||
+        diag2 === sideSize
+    ) {
+        return Player.X;
     }
 
-    // Check topleft-botright diagonal
-    for (let i = 0; i < sideSize; i++) {
-        arr[i] = squares[i * (sideSize + 1)];
-    }
-    if (allEqual(arr)) {
-        return arr[0];
-    }
-
-    // Check topright-botleft diagonal
-    for (let i = 0; i < sideSize; i++) {
-        arr[i] = squares[(i + 1) * (sideSize - 1)];
-    }
-    if (allEqual(arr)) {
-        return arr[0];
+    if (
+        rows.includes(-sideSize) ||
+        cols.includes(-sideSize) ||
+        diag1 === -sideSize ||
+        diag2 === -sideSize
+    ) {
+        return Player.O;
     }
 
-    // Neither player has won
     return null;
 }

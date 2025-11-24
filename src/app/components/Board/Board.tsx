@@ -2,6 +2,11 @@ import Square from "@/app/components/Square/Square";
 import { checkWinner } from "@/app/utils/validation_utils";
 import styles from "./Board.module.css";
 
+export enum Player {
+    X = "X",
+    O = "O",
+}
+
 type BoardProps = {
     xIsNext: boolean;
     squares: (string | null)[];
@@ -24,7 +29,7 @@ export default function Board({
         }
 
         const nextSquares = squares.slice();
-        nextSquares[i] = xIsNext ? "X" : "O";
+        nextSquares[i] = xIsNext ? Player.X : Player.O;
         onPlay(nextSquares);
     }
 
@@ -34,7 +39,7 @@ export default function Board({
     } else if (squares.every((val) => val != null)) {
         status = "You have achieved a TIE!";
     } else {
-        status = "Next Player: " + (xIsNext ? "X" : "O");
+        status = "Next Player: " + (xIsNext ? Player.X : Player.O);
     }
 
     function generateSquareBoard(sideSize: number) {
