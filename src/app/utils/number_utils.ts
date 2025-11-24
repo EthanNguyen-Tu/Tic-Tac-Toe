@@ -1,4 +1,8 @@
-export function boundedNumber(number, lower = -Infinity, upper = Infinity) {
+export function boundedNumber(
+    number: number,
+    lower: number = -Infinity,
+    upper: number = Infinity
+) {
     if (number < lower) {
         return lower;
     } else if (number > upper) {

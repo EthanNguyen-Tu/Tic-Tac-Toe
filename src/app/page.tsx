@@ -16,8 +16,12 @@ export default function Home() {
         setBoardKey(!boardKey);
     };
 
-    const handleBoardSizeInput = (e: React.ChangeEvent<HTMLInputElement>) =>
-        (boardSize.current = boundedNumber(e.target.value, 3, 10));
+    const handleBoardSizeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = Number(e.target.value);
+        if (!isNaN(value)) {
+            boardSize.current = boundedNumber(value, 3, 10);
+        }
+    };
 
     return (
         <div className={styles.page}>
