@@ -1,25 +1,30 @@
 import Board from "@/app/components/Board/Board";
 import { useState } from "react";
-import "./TicTacToe.css";
+import styles from "./TicTacToe.module.css";
 
-function TicTacToe({ boardSideSize }) {
+type TicTacToeProps = {
+    boardSideSize: number;
+};
+
+export default function TicTacToe({ boardSideSize }: TicTacToeProps) {
     const [history, setHistory] = useState([
         Array(boardSideSize ** 2).fill(null),
     ]);
     const [currentMove, setCurrentMove] = useState(0);
 
-    function handlePlay(nextSquares) {
+    function handlePlay(nextSquares: (string | null)[]) {
         const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
         setHistory(nextHistory);
         setCurrentMove(nextHistory.length - 1);
     }
 
-    function jumpTo(nextMove) {
+    function jumpTo(nextMove: number) {
         setCurrentMove(nextMove);
     }
 
     const moves = history.map((_, move) => {
-        let description = move > 0 ? "Go to move #" + move : "Go to game start";
+        const description: string =
+            move > 0 ? "Go to move #" + move : "Go to game start";
         return (
             <li key={move}>
                 <button onClick={() => jumpTo(move)}>{description}</button>
@@ -28,9 +33,9 @@ function TicTacToe({ boardSideSize }) {
     });
 
     return (
-        <div className="tic-tac-toe">
+        <div className={styles.container}>
             {boardSideSize && (
-                <div className="tic-tac-toe-board">
+                <div className={styles.board}>
                     <Board
                         xIsNext={currentMove % 2 === 0}
                         squares={history[currentMove]}
@@ -39,12 +44,10 @@ function TicTacToe({ boardSideSize }) {
                     />
                 </div>
             )}
-            <div className="tic-tac-toe-info">
+            <div className={styles.history}>
                 <h3>Game History:</h3>
                 <ol>{moves}</ol>
             </div>
         </div>
     );
 }
-
-export default TicTacToe;

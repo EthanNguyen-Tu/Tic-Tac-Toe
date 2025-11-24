@@ -1,11 +1,14 @@
-import "./Square.css";
+import styles from "./Square.module.css";
 
-function Square({ value, onSquareClick }) {
+type SquareProps = {
+    value: string | null;
+    onSquareClick: () => void;
+};
+
+export default function Square({ value, onSquareClick }: SquareProps) {
     return (
-        <button className="square" onClick={onSquareClick}>
+        <button className={styles.square} onClick={onSquareClick}>
             {value}
         </button>
     );
 }
-
-export default Square;

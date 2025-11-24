@@ -43,7 +43,7 @@ export default function RootLayout({
                     </a>
                     's Tic-Tac-Toe!
                 </h1>
-                <div class="center instructions-box">
+                <div className="center instructions-box">
                     <b>Instructions:</b>
                     <ol>
                         <li>

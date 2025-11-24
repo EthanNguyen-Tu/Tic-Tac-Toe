@@ -1,11 +1,24 @@
 import Square from "@/app/components/Square/Square";
 import { checkWinner } from "@/app/utils/validation_utils";
-import "./Board.css";
+import styles from "./Board.module.css";
 
-function Board({ xIsNext, squares, onPlay, sideSize }) {
+type BoardProps = {
+    className: string;
+    xIsNext: boolean;
+    squares: (string | null)[];
+    onPlay: (nextSquares: (string | null)[]) => void;
+    sideSize: number;
+};
+
+export default function Board({
+    xIsNext,
+    squares,
+    onPlay,
+    sideSize,
+}: BoardProps) {
     const winner = checkWinner(squares, sideSize);
 
-    function handleClick(i) {
+    function handleClick(i: number) {
         if (squares[i] || winner) {
             // checks to make sure that the square tile does not already have a mark or if a winner has been decided
             return;
@@ -25,7 +38,7 @@ function Board({ xIsNext, squares, onPlay, sideSize }) {
         status = "Next Player: " + (xIsNext ? "X" : "O");
     }
 
-    function generateSquareBoard(sideSize) {
+    function generateSquareBoard(sideSize: number) {
         const row = [];
         for (let i = 0; i < sideSize; i++) {
             const col = [];
@@ -39,7 +52,7 @@ function Board({ xIsNext, squares, onPlay, sideSize }) {
                 );
             }
             row.push(
-                <div key={i} className="board-row">
+                <div key={i} className={styles.boardRow}>
                     {col}
                 </div>
             );
@@ -49,10 +62,8 @@ function Board({ xIsNext, squares, onPlay, sideSize }) {
 
     return (
         <>
-            <div className="status">{status}</div>
+            <div className={styles.status}>{status}</div>
             {generateSquareBoard(sideSize)}
         </>
     );
 }
-
-export default Board;
