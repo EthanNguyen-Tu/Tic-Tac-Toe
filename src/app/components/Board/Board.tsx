@@ -3,7 +3,6 @@ import { checkWinner } from "@/app/utils/validation_utils";
 import styles from "./Board.module.css";
 
 type BoardProps = {
-    className: string;
     xIsNext: boolean;
     squares: (string | null)[];
     onPlay: (nextSquares: (string | null)[]) => void;
